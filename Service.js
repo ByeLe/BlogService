@@ -3,6 +3,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const http = require('http')
 const uploadFile = require('./base/uploadFile.js')
+const classification = require('./base/classification.js')
+const articleInfo = require('./base/articleInfo.js')
 // 创建express实例
 const app = express()
 // 中间件设置允许跨域
@@ -13,8 +15,13 @@ app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Headers', 'Content-Type')
   next()
 })
-app.use(uploadFile)
+// 解析 application/json
+app.use(bodyParser.json())
+// 解析 application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(classification) // 分类
+app.use(uploadFile) // 上传
+app.use(articleInfo) //文章信息
 app.listen(8888)
 console.log('Listening on port 8888')
 
