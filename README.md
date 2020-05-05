@@ -1,6 +1,16 @@
 # BlogService
 个人项目的后台
 
+> 克隆与使用
+
+`1.clone整个项目`
+
+`2.执行 npm  install 进行依赖安装`
+
+`3.在base同级目录创建uploads文件夹`
+`4.执行 node Service.js 启动整个项目`
+
+
 > 根据类型查询文章
 ```javascript
 '/getArticleByType':{
