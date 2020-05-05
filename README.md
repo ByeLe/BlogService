@@ -8,6 +8,7 @@
 `2.执行 npm  install 进行依赖安装`
 
 `3.在base同级目录创建uploads文件夹`
+
 `4.执行 node Service.js 启动整个项目`
 
 
