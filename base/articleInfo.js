@@ -10,10 +10,11 @@ articleInfo.get('/getArticleByType', async (req, res) => {
     sendMessage.send(res, 400, 'show', '暂时没有此分类文章')
     return
   }
-  const size = req.query.size || 10
+  var size = req.query.size || 10
+  size = Number(size)
   const page = req.query.page || 0
   const selectSql = 'SELECT * FROM articleInfo WHERE type = ? LIMIT  ?, ?'
-  const param = [req.query.selectType, page * size, size]
+  const param = [req.query.selectType, page * size, (page+1) * size]
   try {
     let data = await db.sqlHandle(selectSql, param)
     sendMessage.sendWithData(res, 200, 'notAlert', '', data)

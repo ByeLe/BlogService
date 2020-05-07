@@ -15,6 +15,12 @@ function createFolder(path) {
     fs.mkdirSync(path)
   } 
 }
+handle.get('/classification/select', async (req, res) => { 
+  const select = 'SELECT * FROM classification'
+  const param = []
+  const data = await db.sqlHandle(select, param)
+  sendMessage.sendWithData(res, 200, 'show', '数据获取成功', data)
+})
 handle.get('/classification/insert', async (req, res) => {
   if (!req.query.lists) { 
     sendMessage.send(res, 400, 'show', '数据格式有误，请重新输入')
