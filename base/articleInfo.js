@@ -14,10 +14,17 @@ articleInfo.get('/getArticleByType', async (req, res) => {
   size = Number(size)
   const page = req.query.page || 0
   const selectSql = 'SELECT * FROM articleInfo WHERE type = ? LIMIT  ?, ?'
-  const param = [req.query.selectType, page * size, (page+1) * size]
+  const param = [req.query.selectType, page * size, (page + 1) * size]
+  const selectAll = 'SELECT * FROM articleInfo WHERE type = ?'
+  const allParam = [req.query.selectType]
+  var all = await db.sqlHandle(selectAll, allParam)
   try {
     let data = await db.sqlHandle(selectSql, param)
-    sendMessage.sendWithData(res, 200, 'notAlert', '', data)
+    const send = {
+      len: all.length,
+      detail: data
+    }
+    sendMessage.sendWithData(res, 200, 'notAlert', '', send)
   } catch (e) { 
 
   } 
